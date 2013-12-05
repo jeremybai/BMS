@@ -1,0 +1,72 @@
+
+{% extends "base.html" %}
+
+{% block title %} Book - Create {% endblock %}
+{% block extrahead %}
+    <script type="text/javascript" language="javascript" src="{{ STATIC_URL }}js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" language="javascript" src="{{ STATIC_URL }}js/douban/api.js"></script>
+    <script type="text/javascript" language="javascript" src="{{ STATIC_URL }}js/douban/api-parser.js"></script>
+    <script language="javascript">
+        $(document).ready(function(){
+            $("#id_isbn").after("<span>输入10位或13位ISBN后回车，系统将自动获取图书信息</span>");
+            $(":input").keypress(function(e) {
+                var key = e.which;
+                if (13 == key) {
+                    e.preventDefault();
+                    if(this.id=="id_isbn"){
+                        fnFromDouban();
+                    }
+                    var index = $(":input").index(this);
+                    {#                    var newIndex = index + 12;#}
+                    {#                    $(":input:eq(" + index + ")").focus();#}
+                }
+            });
+        });
+
+        function fnFromDouban(){
+            var reg=/^\d{10}|d{13}$/;
+            if(!reg.test($("#id_isbn").val())){
+                alert("正确的ISBN号应该为10位或13位！");
+                return false;
+            }
+            DOUBAN.apikey = '00fa6c0654689a0202ef4412fd39ce06';
+            DOUBAN.getISBNBook({
+                isbn:$("#id_isbn").get(0).value,
+                callback:function(bookinfo){
+                    var list = DOUBAN.parseSubject(bookinfo);
+                    if(list==null || list.length==0)
+                    {
+                        $("#id_isbn").focus();
+                        alert("您要找的书的ISBN号不存在，请重新输入！");
+                    }
+                    else
+                    {
+                        $("#id_title").val(list.title ? list.title : "");
+                        $("#id_summary").val(list.summary ? list.summary : "--");
+                        $("#id_subtitle").val(list.attribute["subtitle"] ? list.attribute["subtitle"] : "--" );
+                        $("#id_author").val(list.attribute["author"] ? list.attribute["author"] : "--" );
+                        $("#id_translator").val(list.attribute["translator"] ? list.attribute["translator"]:"--" );
+                        $("#id_pages").val(list.attribute["pages"] ? list.attribute["pages"] : "--" );
+                        $("#id_price").val(list.attribute["price"] ? list.attribute["price"]: "--" );
+                        $("#id_publisher").val(list.attribute["publisher"] ? list.attribute["publisher"] : "--" );
+                        $("#id_pubdate").val(list.attribute["pubdate"] ? list.attribute["pubdate"] : "--" );
+                        $("#id_cover_img").val(list.link.image);
+                        $("#id_author_intro").val(list.attribute["author-intro"] ? list.attribute["author-intro"] : "--" );
+                    }
+                }
+            })
+            return true;
+        }
+    </script>
+{% endblock %}
+{% block heading %}<h1>  Book - Create </h1>  {% endblock %}
+{% block content %}
+    <table>
+        <form action="" method="POST"> {% csrf_token %}
+            {{form}}
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Create"/></td>
+            </tr>
+        </form>
+    </table>
+{% endblock %}

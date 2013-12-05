@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %} Book - View {% endblock %}
+
+{% block heading %} <h1> Book</h1><h2>View</h2>  {% endblock %}
+
+{% block extrahead %}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-2 ">
+            <div class="row">
+                <img src="{{item.cover_img}}"class="img-thumbnail img-center" />
+            </div>
+            <br/><br/><br/>
+            <canvas id="pie" width="120"></canvas>
+            <p>借阅本书所占比例饼状图</p>
+        </div>
+        <div class="col-md-10">
+            <table class="table table-condensed table-hover">
+                {#                <thead>#}
+                {#                <tr>#}
+                {#                    <th>Student-ID</th>#}
+                {#                    <th>First Name</th>#}
+                {#                </tr>#}
+                {#                </thead>#}
+                <tbody>
+                {% for field, value in item.get_fields %}
+                    {% if field.name != 'cover_img' %}
+                        <tr>
+                            <td>{{ field.verbose_name }}</td>
+                            <td> {{ value }} </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extrafooter %}
+    var pieData = [
+    {
+    value: 30,
+    color:"#F38630"
+    },
+    {
+    value : 150,
+    color : "#69D2E7"
+    }
+
+    ];
+
+    var myPie = new Chart(document.getElementById("pie").getContext("2d")).Pie(pieData);
+{% endblock %}
