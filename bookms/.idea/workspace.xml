@@ -50,7 +50,7 @@
       <file leaf-file-name="search_book.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/bookapp/search_book.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="0" selection-start="1454" selection-end="1454" vertical-scroll-proportion="0.5308642" vertical-offset="597" max-vertical-offset="1083">
+            <state line="50" column="10" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.72633743" vertical-offset="597" max-vertical-offset="1083">
               <folding />
             </state>
           </provider>
@@ -787,7 +787,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/bookapp/search_book.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="0" selection-start="1454" selection-end="1454" vertical-scroll-proportion="0.5308642" vertical-offset="597" max-vertical-offset="1083">
+        <state line="50" column="10" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.72633743" vertical-offset="597" max-vertical-offset="1083">
           <folding />
         </state>
       </provider>
