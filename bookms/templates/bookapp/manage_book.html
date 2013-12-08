@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %} 图书管理 {% endblock %}
+
+{% block content %}
+    {% for item in list_items.object_list %}
+        <div class="row">
+            <div class="col-md-2">
+                <img src="{{item.cover_img}}"class="img-thumbnail img-center" />
+            </div>
+            <div class="col-md-3">
+                <p>书名：{{item.title}}</p>
+                <p>作者：{{item.author}}</p>
+                <p>
+                    <a class="btn btn-primary" href="{% url "bookapp.views.view_book" item.id %}"><span class=" icon-check icon-white" ></span>详细 </a>
+                    <a class="btn btn-danger" href="{% url "bookapp.views.edit_book" item.id %}"> <span class=" icon-check icon-white" ></span>修改 </a>
+                </p>
+            </div>
+            <div class="col-md-7">
+                <p>简介：{{item.summary}}</p>
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+    <div class="row">
+        {% if list_items.has_previous %}
+            <a href="?page={{ list_items.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+Page {{ list_items.number }} of {{ list_items.paginator.num_pages }}.
+</span>
+
+        {% if list_items.has_next %}
+            <a href="?page={{ list_items.next_page_number }}">下一页</a>
+        {% endif %}
+
+    </div>
+{% endblock %}

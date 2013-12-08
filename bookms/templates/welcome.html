@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.png">
+
+    <title>BMS</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap.icon-large.min.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="{{ STATIC_URL }}css/carousel.css" rel="stylesheet">
+
+    <style>
+        {#        body{#}
+        {#            background-color: #F8F8F8;#}
+        {#        }#}
+        p{
+            font-family:'Microsoft Yahei', Helvetica, Arial, sans-serif;
+        }
+
+        label{
+            font-family:'Microsoft Yahei', Helvetica, Arial, sans-serif;
+        }
+        a.bookname{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<!-- NAVBAR
+================================================== -->
+<body>
+<br/><br/>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href={% url "bookapp.views.welcome" %}>图书管理系统</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class=""><a href={% url "bookapp.views.list_book" %}>图书信息</a></li>
+                <li><a href={% url "bookapp.views.manage_book" %}>图书管理</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">我的图书馆 <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href={% url "bookapp.views.account_edit" %}>个人资料</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">已借书籍</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">到期书籍</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">借阅历史</a></li>
+                    </ul>
+                </li>
+            </ul>
+            {% block loginmessage %}
+                {% if request.user.is_authenticated %}
+                    <div class="navbar-right">
+                        <p class="navbar-text">欢迎您：<a href="#" class="navbar-link">{{ request.user.username }}</a></p>
+                        <a href="{%url "logout"%}" type="submit" class="btn btn-default navbar-btn">注 销</a>
+                    </div><!--/.navbar-collapse -->
+                {% else %}
+                    <div class="navbar-right">
+                        {#<a href="{%url "login"%}" type="submit" class="btn btn-default navbar-btn" >登 陆</a>#}
+                        <a class="btn btn-default navbar-btn"  data-toggle="modal" data-target="#LoginModal">登 陆</a>
+                        {#                        <a href="{%url "register"%}" type="submit" class="btn btn-default navbar-btn ">注 册</a>#}
+                        <a class="btn btn-default navbar-btn"  data-toggle="modal" data-target="#RegisterModal">注 册</a>
+                    </div><!--/.navbar-collapse -->
+                {% endif %}
+            {% endblock %}
+        </div>
+
+    </div>
+</div>
+
+<!-- Carousel
+================================================== -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item active">
+            {#            <img data-src="holder.js/900x500/auto/#777:#7a7a7a/text:First slide" alt="First slide">#}
+            <img alt="" src="{{ STATIC_URL }}img/pic1.jpg" />
+            <div class="container">
+                <div class="carousel-caption">
+                    {#                    <h1>Example headline.</h1>#}
+                    {#                    <h2>Only has compared to the others early, diligently diligently, canfeel the successful taste.</h2>#}
+                    {#                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>#}
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            {#            <img data-src="holder.js/900x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide">#}
+            <img alt="" src="{{ STATIC_URL }}img/pic2.jpg" />
+            <div class="container">
+                <div class="carousel-caption">
+                    {#                    <h1>Another example headline.</h1>#}
+                    {#                    <h2>Nobody can casually succeed, it comes from the thoroughself-control and the will.</h2>#}
+                    {#                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>#}
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            {#            <img data-src="holder.js/900x500/auto/#555:#5a5a5a/text:Third slide" alt="Third slide">#}
+            <img alt="" src="{{ STATIC_URL }}img/pic3.jpg" />
+            <div class="container">
+                <div class="carousel-caption">
+                    {#                    <h1>One more for good measure.</h1>#}
+                    {#                    <h2>Studies this matter, lacks the time, but is lacks diligently.</h2>#}
+                    {#                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>#}
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            {#            <img data-src="holder.js/900x500/auto/#555:#5a5a5a/text:Third slide" alt="Third slide">#}
+            <img alt="" src="{{ STATIC_URL }}img/pic4.jpg" />
+            <div class="container">
+                <div class="carousel-caption">
+                    {#                    <h1>One more for good measure.</h1>#}
+                    {#                    <h2>Studies this matter, lacks the time, but is lacks diligently.</h2>#}
+                    {#                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>#}
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+</div><!-- /.carousel -->
+
+<!-- Marketing messaging and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
+
+<div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+        <div class="col-lg-4">
+            <img class="img-circle" src="{{ STATIC_URL }}img/linuxtux.jpg" alt="Generic placeholder image">
+            <h2>Tux</h2>
+            <p>Linux则常用来指基于Linux内核的完整操作系统，包括GUI组件和许多其他实用工具。由于这些支持用户空间的系统工具
+                和库主要由理查德·斯托曼于1983年发起的GNU计划提供，自由软件基金会提议将该组合系统命名为“GNU/Linux”。</p>
+            {#            <p><a class="btn btn-default" href="http://zh.wikipedia.org/wiki/Linux" role="button">View details &raquo;</a></p>#}
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="img-circle" src="{{ STATIC_URL }}img/FreeBSD.jpg" alt="Generic placeholder image">
+            <h2>Daemon</h2>
+            <p>FreeBSD是一种自由的类Unix操作系统，是由经过BSD、386BSD和4.4BSD发展而来的类Unix的一个重要分支。
+                FreeBSD拥有超过200名活跃开发者和上千名贡献者。FreeBSD被认为是自由操作系统中的不知名的巨人。
+                它不是Unix，但如Unix一样运行，兼容POSIX。作为一个操作系统，FreeBSD被认为相当稳健可靠。</p>
+            {#            <p><a class="btn btn-default" href="http://zh.wikipedia.org/wiki/Freebsd#" role="button">View details &raquo;</a></p>#}
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img class="img-circle" src="{{ STATIC_URL }}img/Javaduke.jpg" alt="Generic placeholder image">
+            <h2>Duke</h2>
+            <p>Java是一种计算机编程语言，拥有跨平台、面向对象、泛型编程的特性，广泛应用于企业级Web应用开发和移动应用开发。</p>
+            {#            <p><a class="btn btn-default" href="http://zh.wikipedia.org/wiki/Java" role="button">View details &raquo;</a></p>#}
+        </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-lg-4">
+            <p><a class="btn btn-default" href="http://zh.wikipedia.org/wiki/Linux" role="button">View In Wiki &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <p><a class="btn btn-default" href="http://zh.wikipedia.org/wiki/Freebsd#" role="button">View In Wiki &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <p><a class="btn btn-default" href="http://zh.wikipedia.org/wiki/Java" role="button">View In Wiki &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+    <!-- START THE FEATURETTES -->
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-6">
+            <h2 class="featurette-heading"><a class="bookname" href="/bookapp/book/view/3/">飘</a><span class="text-muted"></span></h2>
+            <br/>
+            <p class="lead">小说中的故事发生在1861年美国南北战争前夕。生活在南方的少女郝思嘉从小深受南方文化传统
+                的熏陶，可在她的血液里却流淌着野性的叛逆因素。随着战火的蔓廷和生活环境的恶化，郝思嘉的叛逆个性越来
+                越丰满，越鲜明，在一系列的的挫折中她改造了自我，改变了个人甚至整个家族的命运，成为时代时势造就的新
+                女性的形象。</p>
+        </div>
+        <div class="col-md-6">
+            <img class="featurette-image img-responsive img-rounded" src="{{ STATIC_URL }}img/gonewithwind.jpg" alt="Generic placeholder image">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-6">
+            <img class="featurette-image img-responsive img-rounded" src="{{ STATIC_URL }}img/hongloumeng.jpg" alt="Generic placeholder image">
+        </div>
+        <div class="col-md-6">
+            <h2 class="featurette-heading"><a class="bookname" href="/bookapp/book/view/4/">红楼梦</a><span class="text-muted"></span></h2>
+            <br/>
+            <p class="lead">《红楼梦》是一部百科全书式的长篇小说。以宝黛爱情悲剧为主线，以四大家族的荣辱兴衰为背景，
+                描绘出18世纪中国封建社会的方方面面，以及封建专制下新兴资本主义民主思想的萌动。结构宏大、情节委婉、
+                细节精致，人物形象栩栩如生，声口毕现，堪称中国古代小说中的经典。</p>
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <div class="row featurette">
+        <div class="col-md-6">
+            <h2 class="featurette-heading"><a class="bookname" href="/bookapp/book/view/5/"> 傲慢与偏见</a><span class="text-muted"></span></h2>
+            <br/>
+            <p class="lead">《傲慢与偏见》是英国著名女作家简·奥斯汀（Jane Austen 1775～1817年）的代表作，
+                是一部描写爱情与婚姻的小说。这部小说以男女主人公达西和伊丽莎白由于傲慢和偏见而产生的爱情纠葛为线索......
+            </p>
+        </div>
+        <div class="col-md-6">
+            <img class="featurette-image img-responsive img-rounded" src="{{ STATIC_URL }}img/PrideandPrejudice.jpg" alt="Generic placeholder image">
+        </div>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <!-- /END THE FEATURETTES -->
+
+
+    <!-- FOOTER -->
+    <footer>
+        <p class="pull-right"><a class="btn btn-default" href="#"><span class="glyphicon glyphicon-arrow-up"></span></a></p>
+        {#        <p>&copy; 2013 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>#}
+        <p>&copy; JeremyBai 2013</p>
+    </footer>
+
+</div><!-- /.container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}js/holder.js"></script>
+</body>
+</html>

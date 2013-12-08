@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="generator"
+          content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <title>Bootstrap In Practice - 分栏</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap -->
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{ STATIC_URL }}font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" />
+
+    {#	<link href='http://fonts.googleapis.com/css?family=Abel|Open+Sans:400,600' rel='stylesheet'>#}
+    <link href="{{ STATIC_URL }}css/bootstrap.icon-large.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/jumbotron.css" rel="stylesheet">
+
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/offcanvas.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap.icon-large.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Abel|Open+Sans:400,600' rel='stylesheet'>
+
+    <style>
+        html {
+            background: url({{ STATIC_URL }}img/6133364748_c34c5a1aaf_b.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        body {
+            padding-top: 20px;
+            font-size: 16px;
+            font-family: "Open Sans",serif;
+            background: transparent;
+        }
+        h1 {
+            font-family: "Abel", Arial, sans-serif;
+            font-weight: 400;
+            font-size: 40px;
+        }
+
+        /* Override B3 .panel adding a subtly transparent background */
+        .panel {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .margin-base-vertical {
+            margin: 40px 0;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 panel panel-default">
+
+            <h1 class="margin-base-vertical">Have you ever seen the rain?</h1>
+            <p>Someone told me long ago there's a calm before the storm. I know, It's been comin for some time.</p>
+            <p>When it's over, so they say, it'll rain a sunny day. I know, Shinin down like water.</p>
+            <p>I want to know, have you ever seen the rain?</p>
+            <hr/>
+            {% block content %}{% endblock %}
+            {% block errormessage %}{% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+</html>
