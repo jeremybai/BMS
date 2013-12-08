@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+    <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.png">
 
-    <title>Carousel Template for Bootstrap</title>
+    <title>BMS</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
@@ -35,6 +35,9 @@
 
         label{
             font-family:'Microsoft Yahei', Helvetica, Arial, sans-serif;
+        }
+        a.bookname{
+            text-decoration: none;
         }
     </style>
 </head>
@@ -198,7 +201,7 @@
 
     <div class="row featurette">
         <div class="col-md-6">
-            <h2 class="featurette-heading">飘<span class="text-muted"></span></h2>
+            <h2 class="featurette-heading"><a class="bookname" href="/bookapp/book/view/3/">飘</a><span class="text-muted"></span></h2>
             <br/>
             <p class="lead">小说中的故事发生在1861年美国南北战争前夕。生活在南方的少女郝思嘉从小深受南方文化传统
                 的熏陶，可在她的血液里却流淌着野性的叛逆因素。随着战火的蔓廷和生活环境的恶化，郝思嘉的叛逆个性越来
@@ -217,7 +220,7 @@
             <img class="featurette-image img-responsive img-rounded" src="{{ STATIC_URL }}img/hongloumeng.jpg" alt="Generic placeholder image">
         </div>
         <div class="col-md-6">
-            <h2 class="featurette-heading">红楼梦<span class="text-muted"></span></h2>
+            <h2 class="featurette-heading"><a class="bookname" href="/bookapp/book/view/4/">红楼梦</a><span class="text-muted"></span></h2>
             <br/>
             <p class="lead">《红楼梦》是一部百科全书式的长篇小说。以宝黛爱情悲剧为主线，以四大家族的荣辱兴衰为背景，
                 描绘出18世纪中国封建社会的方方面面，以及封建专制下新兴资本主义民主思想的萌动。结构宏大、情节委婉、
@@ -229,7 +232,7 @@
 
     <div class="row featurette">
         <div class="col-md-6">
-            <h2 class="featurette-heading">傲慢与偏见<span class="text-muted"></span></h2>
+            <h2 class="featurette-heading"><a class="bookname" href="/bookapp/book/view/5/"> 傲慢与偏见</a><span class="text-muted"></span></h2>
             <br/>
             <p class="lead">《傲慢与偏见》是英国著名女作家简·奥斯汀（Jane Austen 1775～1817年）的代表作，
                 是一部描写爱情与婚姻的小说。这部小说以男女主人公达西和伊丽莎白由于傲慢和偏见而产生的爱情纠葛为线索......

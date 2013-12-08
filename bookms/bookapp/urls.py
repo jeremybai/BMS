@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     (r'book/edit/(?P<id>[^/]+)/$', edit_book),
     (r'book/view/(?P<id>[^/]+)/$', view_book),
     (r'book/manage/$', manage_book),
+    (r'book/search/$', search_book),
 )

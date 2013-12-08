@@ -63,4 +63,5 @@ class LoginForm(forms.Form):
     username=forms.CharField(label=_(u"昵称"),max_length=30,widget=forms.TextInput(attrs={'size': 20,}))
     password=forms.CharField(label=_(u"密码"),max_length=30,widget=forms.PasswordInput(attrs={'size': 20,}))
 
-
+class SearchForm(forms.Form):
+    query=forms.CharField(label=_(u"查询"),max_length=30,widget=forms.TextInput(attrs={'size': 20,}))

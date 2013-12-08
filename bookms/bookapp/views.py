@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login ,logout as auth_logout
 from django.utils.translation import ugettext_lazy as _
-from forms import RegisterForm,LoginForm
+from forms import RegisterForm,LoginForm,SearchForm
 
 import datetime
 # app specific files
@@ -37,7 +37,6 @@ def list_book(request):
     list_items = Book.objects.all()
     paginator = Paginator(list_items ,10)
 
-
     try:
         page = int(request.GET.get('page', '1'))
     except ValueError:
@@ -51,6 +50,22 @@ def list_book(request):
     t = get_template('bookapp/list_book.html')
     c = RequestContext(request,locals())
     return HttpResponse(t.render(c))
+
+def search_book(request, query):
+    search_items = Book.objects.filter(title__contains=query)
+    paginator = Paginator(search_items, 10)
+    try:
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+    try:
+        search_items = paginator.page(page)
+    except :
+        search_items = paginator.page(paginator.num_pages)
+    t = get_template('bookapp/search_book.html')
+    c = RequestContext(request,locals())
+    return HttpResponse(t.render(c))
+
 
 def manage_book(request):
     list_items = Book.objects.all()
@@ -90,6 +105,28 @@ def list_book(request):
             user.save()
             _login(request,username,password)#注册完毕 直接登陆
             return HttpResponseRedirect('/bookapp/book/list/')
+
+    form = SearchForm()
+    if request.method == 'POST':
+        form=SearchForm(request.POST.copy())
+        if form.is_valid():
+            query = form.cleaned_data["query"]
+            search_items = Book.objects.filter(title__contains=query)
+
+            paginator = Paginator(search_items, 10)
+            try:
+                page = int(request.GET.get('page', '1'))
+            except ValueError:
+                page = 1
+            try:
+                search_items = paginator.page(page)
+            except :
+                search_items = paginator.page(paginator.num_pages)
+            t = get_template('bookapp/search_book.html')
+            c = RequestContext(request,locals())
+            return HttpResponse(t.render(c))
+            #search_book(request, query)
+            #return HttpResponseRedirect('/bookapp/book/search/',query)
 
     list_items = Book.objects.all()
     paginator = Paginator(list_items ,10)

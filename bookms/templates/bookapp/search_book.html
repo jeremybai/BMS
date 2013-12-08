@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}
+    图书搜索
+{% endblock %}
+
+{% block content %}
+
+    {% for item in search_items.object_list %}
+        <div class="row">
+
+            <div class="col-md-2">
+                <br>
+                <img src="{{item.cover_img}}"class="img-thumbnail img-center" />
+            </div>
+
+            <div class="col-md-8">
+                <h4>{{item.title}}</h4>
+                <br>
+                <p>ISBN:{{item.isbn}}</p>
+                <p>作者：{{item.author}}</p>
+                <p>出版社：{{item.publisher}}</p>
+            </div>
+                <br>
+                <div class="col-md-2 pull-right">
+                   <p> <a class="btn btn-primary " href="{% url "bookapp.views.view_book" item.id %}"><i class="icon-check"></i> 详细 </a></p>
+                    {% if item.available %}
+                        <p><a class="btn btn-success" href="#"> <i class="icon-check"></i> 可借</a></p>
+                    {% else %}
+                        <p><a class="btn btn-danger" href="#"> <i class="icon-check"></i> 在外</a></p>
+                    {% endif %}
+                </div>
+
+
+        </div>
+        <hr>
+    {% endfor %}
+    <div class="row">
+        {% if search_items.has_previous %}
+            <a href="?page={{ search_items.previous_page_number }}">上一页</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ search_items.number }} of {{ search_items.paginator.num_pages }}.
+        </span>
+
+        {% if search_items.has_next %}
+            <a href="?page={{ search_items.next_page_number }}">下一页</a>
+        {% endif %}
+
+    </div>
+{% endblock %}

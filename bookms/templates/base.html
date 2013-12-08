@@ -98,12 +98,17 @@
         </div><!--/span-->
         <div class="col-md-3">
             <div class="row">
-                <form class="form-inline pull-right" role="search">
+
+
+                <form class="form-inline pull-right" role="search" action="" method="post">
+                    {% csrf_token %}
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input  type="text" class="form-control"  name="query" placeholder="Search">
                     </div>
-                    <button type="submit" class="btn btn-default"> 搜 索 </button>
+                    <button id="search_box" type="submit" class="btn btn-default"> 搜 索 </button>
                 </form>
+
+
             </div>
             <br>
             <div class="row">
@@ -234,6 +239,14 @@
 
     }
     var myLine = new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
+
+{#     $(document).ready(function(){#}
+{#            $("#search_box").click(function(e){#}
+{#                alert("1");#}
+{#                var query = $("#search_box").val();#}
+{#                window.location.href="{% url "bookapp.views.welcome" %}";#}
+{#            });#}
+{#        });#}
     {% block extrafooter %}{% endblock %}
 </script>
 

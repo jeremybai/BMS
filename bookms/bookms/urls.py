@@ -18,14 +18,13 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'bookapp.views.welcome'),
-
+    url(r'^welcome$', 'bookapp.views.welcome'),
 
     url(r'^accounts/index$', 'bookapp.views.index',name="accounts_index"),
     url(r'^accounts/register$', 'bookapp.views.register',name="register"),
     url(r'^accounts/login$', 'bookapp.views.login',name="login"),
     url(r'^accounts/logout$', 'bookapp.views.logout',name="logout"),
     url(r'^accounts/edit$', 'bookapp.views.account_edit',name="edit"),
-
 )
 
 urlpatterns += patterns ('',
