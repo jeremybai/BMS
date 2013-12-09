@@ -112,7 +112,6 @@ def list_book(request):
         if form.is_valid():
             query = form.cleaned_data["query"]
             search_items = Book.objects.filter(title__contains=query)
-
             paginator = Paginator(search_items, 10)
             try:
                 page = int(request.GET.get('page', '1'))
@@ -122,6 +121,7 @@ def list_book(request):
                 search_items = paginator.page(page)
             except :
                 search_items = paginator.page(paginator.num_pages)
+
             t = get_template('bookapp/search_book.html')
             c = RequestContext(request,locals())
             return HttpResponse(t.render(c))
